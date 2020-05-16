@@ -1,0 +1,5 @@
+- name: restart mongod
+  service: name=mongod state=restarted enabled=yes
+
+- name: reload mongod
+  service: name=mongod state=reloaded

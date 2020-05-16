@@ -1,0 +1,14 @@
+bind_address: 0.0.0.0:9000
+
+graylog_password_secret: dsLXHLxMiKnIF2LQ2XHoL5ypoQSQeqtSqn3MXfNb3orqtBYn4YCUMhj6mw4S0FoOFbjOwdrO4Q8OHchB971vvkKECkrXAm2a
+# The default user is "admin" and the default password is "password".
+
+graylog_root_password_sha2: 3c396130c7832a83e99d7f8c17a0446090384d91944756795c6bd0cf0a1c0b1a
+
+graylog_email: sabir@gmail.com
+
+timezone: Asia/Kolkata
+
+replicaset_name: rs0
+
+domain_name: "{{ domain }}"

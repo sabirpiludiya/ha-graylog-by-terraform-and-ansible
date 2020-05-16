@@ -1,0 +1,27 @@
+[production]
+node1 node_name=node1 ansible_host=34.195.67.173
+
+node2 node_name=node2 ansible_host=3.229.37.106
+
+node3 node_name=node3 ansible_host=52.73.194.65
+
+
+[primary]
+node1 node_name=node1 ansible_host=34.195.67.173
+
+
+
+[start1]
+node1 node_name=node1 ansible_host=34.195.67.173
+
+
+
+[start2]
+node2 node_name=node2 ansible_host=3.229.37.106
+
+
+
+[start3]
+node3 node_name=node3 ansible_host=52.73.194.65
+
+

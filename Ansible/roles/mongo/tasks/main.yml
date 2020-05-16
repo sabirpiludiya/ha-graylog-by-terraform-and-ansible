@@ -1,0 +1,41 @@
+---
+
+#- name: Create the Elasticsesarch configuration file
+#  template: src=elasticsearch.yml.j2
+ #           dest=/etc/elasticsearch/elasticsearch.yml
+  #          backup=yes
+   #         owner=root
+    #        mode="777"
+#  notify: reload mongod
+#  become: yes
+
+- name: Copy Mongo Configuration File
+  become: yes
+  template:
+    src: mongod.conf.j2
+    dest: "/etc/mongod.conf"
+    owner: root
+#    group: "{{ es_group }}"
+    mode: "777"
+    force: yes
+  register: system_change
+  notify: restart mongod
+
+#- name: Ensure Mongod service is started
+#  service: name=mongod state=started enabled=yes
+
+#- name: restart Mongod
+#  service: name=mongod state=restarted
+
+- name: Start Mongod.
+  service:
+    name: mongod
+    state: started
+    enabled: true
+
+- name: Make sure Mongod is running before proceeding.
+  wait_for:
+    host: "0.0.0.0"
+    port: "27017"
+    delay: 5
+    timeout: 300

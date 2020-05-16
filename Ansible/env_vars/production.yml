@@ -1,0 +1,14 @@
+---
+# Nginx settings.
+
+domain: amazon.com
+replSet: rs0
+nginx_static_dir: static
+nginx_use_letsencrypt: no
+nginx_strong_dh_group: no
+certbot_admin_email: "info@example.com"
+# Cors Settings
+## Set as empty string or '0' to disable
+nginx_cors_url_regexs: 'https?://(localhost:5000|www\.example\.com|www\.example2\.org)'
+nginx_cors_methods: 'GET,POST,OPTIONS'
+

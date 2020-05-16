@@ -1,0 +1,26 @@
+---
+
+- name: restart graylog
+  service: name=graylog-server state=restarted
+
+- name: restart elasticsearch
+  service: name=elasticsearch state=restarted
+
+- name: restart mongod
+  become: true
+  become_method: sudo
+  service:
+    name: mongod
+    state: restarted
+  tags: mongod
+
+
+
+- name: restart graylog
+  service: name=graylog-server state=restarted
+
+
+
+- name: restart graylog
+  service: name=graylog-server state=restarted
+

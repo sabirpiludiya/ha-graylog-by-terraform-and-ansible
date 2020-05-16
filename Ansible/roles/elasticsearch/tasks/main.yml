@@ -1,0 +1,49 @@
+---
+
+#- name: Create the Elasticsesarch configuration file
+#  template: src=elasticsearch.yml.j2
+ #           dest=/etc/elasticsearch/elasticsearch.yml
+  #          backup=yes
+   #         owner=root
+    #        mode="777"
+#  notify: reload elasticsearch
+#  become: yes
+
+
+- name: Install a Elasticsearch .deb package
+  apt:
+    deb: https://bitbucket.org/SabirPiludiya/graylog/raw/57a40fa81394961d796fbc7474d1fa09f9d66e21/elasticsearch-6.8.6.deb
+  become: yes
+  
+  
+- name: Copy Configuration File
+  become: yes
+  template:
+    src: elasticsearch.yml.j2
+    dest: "/etc/elasticsearch/elasticsearch.yml"
+    owner: root
+#    group: "{{ es_group }}"
+    mode: "660"
+    force: yes
+  register: system_change
+  notify: restart elasticsearch
+
+#- name: Ensure Elasticsesarch service is started
+#  service: name=elasticsearch state=started enabled=yes
+
+#- name: restart Elasticsearch
+#  service: name=elasticsearch state=restarted
+
+
+- name: Start Elasticsearch.
+  service:
+    name: elasticsearch
+    state: started
+    enabled: true
+
+- name: Make sure Elasticsearch is running before proceeding.
+  wait_for:
+    host: "0.0.0.0"
+    port: "9200"
+    delay: 3
+    timeout: 300

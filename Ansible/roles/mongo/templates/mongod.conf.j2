@@ -1,0 +1,20 @@
+storage:
+  dbPath: /var/lib/mongodb
+  journal:
+    enabled: true
+
+systemLog:
+  destination: file
+  logAppend: true
+  path: {{path}}
+
+net:
+  port: 27017
+  bindIp: 0.0.0.0
+
+processManagement:
+  timeZoneInfo: {{time_zone}}
+
+replication:
+  replSetName: {{replicaset_name}}
+

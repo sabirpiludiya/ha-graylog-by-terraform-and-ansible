@@ -1,0 +1,70 @@
+---
+
+- name: restart elasticsearch
+  service: name=elasticsearch state=restarted
+
+
+
+- name: Wait for server to restart
+  wait_for:
+    port=9000
+    delay=1
+    timeout=30
+
+
+- name: restart mongod
+  become: true
+  become_method: sudo
+  service:
+    name: mongod
+    state: restarted
+  tags: mongod
+
+
+#- name: restart graylog
+#  wait_for:
+#    delay: 10
+#  become: true
+#  become_method: sudo
+#  service: name=graylog-server state=restarted
+
+
+
+
+- name: Wait for server to restart
+  wait_for:
+    port=9000
+    delay=1
+    timeout=60
+
+#- name: restart graylog
+#  become: true
+#  become_method: sudo
+#  service: name=graylog-server state=restarted
+
+
+
+- name: "Wait for Graylog server to startup"
+  uri:
+    url: "0.0.0.0:9000"
+    status_code: 200
+    validate_certs: False
+  register: result
+  until: result.status == 200
+  retries: 60
+  delay: 2
+  when: True
+
+
+
+
+
+- name: restart graylogg
+  become: true
+  become_method: sudo
+  service:
+    name: graylog-server
+    state: started
+  tags: graylog
+
+

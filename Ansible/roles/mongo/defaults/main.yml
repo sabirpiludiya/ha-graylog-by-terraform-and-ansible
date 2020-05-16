@@ -1,0 +1,7 @@
+---
+
+replicaset_name: "{{replSet}}"
+
+time_zone: /usr/share/zoneinfo
+
+path: /var/log/mongodb/mongod.log

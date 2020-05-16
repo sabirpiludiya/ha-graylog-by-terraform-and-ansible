@@ -1,0 +1,25 @@
+cluster.name: {{elastic_cluster_name}}
+
+
+node.name: {{inventory_hostname}}
+
+node.master: true
+node.data: true
+node.attr.size: medium
+
+
+path.data: {{path_data}}
+path.logs: {{path_logs}}
+
+http.port: 9200
+
+network.host: 0.0.0.0
+network.bind_host: 0.0.0.0
+network.publish_host: 0.0.0.0
+
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+
+discovery.zen.ping.unicast.hosts: ["{{hostvars[groups['production'][0]].ansible_host}}:9300","{{hostvars[groups['production'][1]].ansible_host}}:9300","{{hostvars[groups['production'][2]].ansible_host}}:9300"]
+
+action.auto_create_index: .monitoring*,.watches,.triggered_watches,.watcher-history*,.ml*

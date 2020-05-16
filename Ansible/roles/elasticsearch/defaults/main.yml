@@ -1,0 +1,9 @@
+---
+
+elastic_cluster_name: graylog
+
+nginx_server_name: "{{ inventory_hostname }}"
+
+path_data: /var/lib/elasticsearch
+
+path_logs: /var/log/elasticsearch

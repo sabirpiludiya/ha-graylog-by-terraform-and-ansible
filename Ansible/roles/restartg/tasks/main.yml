@@ -1,0 +1,14 @@
+---
+
+#- name: Ensure Elasticsesarch service is started
+#  service: name=elasticsearch state=started enabled=yes
+
+#- name: restart Elasticsearch
+#  service: name=elasticsearch state=restarted
+
+
+- name: ReStart Graylog.
+  service:
+    name: graylog-server
+    state: restarted
+    enabled: true

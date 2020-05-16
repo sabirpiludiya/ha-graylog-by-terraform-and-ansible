@@ -1,0 +1,51 @@
+---
+
+- name: Provision a Graylog server
+  hosts: production
+  become: yes
+  become_user: root
+  remote_user: ubuntu
+  vars_files:
+    - env_vars/production.yml
+    - env_vars/domain.yml
+  roles:
+     - nginx
+     - mongo 
+     - elasticsearch
+     - graylog
+
+- name: Initialize mongo Replica 
+  hosts: primary
+  become: yes
+  become_user: root
+  remote_user: ubuntu
+  vars_files:
+    - env_vars/production.yml
+  roles:
+     - initreplica
+     - restartg
+
+
+- name: Restart1
+  hosts: start1
+  become: yes
+  become_user: root
+  remote_user: ubuntu
+  roles:
+     - restartg
+
+- name: Restart2
+  hosts: start2
+  become: yes
+  become_user: root
+  remote_user: ubuntu
+  roles:
+     - restartg
+
+- name: Restart3
+  hosts: start3
+  become: yes
+  become_user: root
+  remote_user: ubuntu
+  roles:
+     - restartg

@@ -1,0 +1,40 @@
+---
+
+- name: Copy the Graylog configuration file
+  become: yes
+  template:
+    src: graylog.server.conf.j2
+    dest: "/etc/graylog/server/server.conf"
+    owner: root
+#    group: "{{ es_group }}"
+    mode: "777"
+    force: yes
+  register: system_change
+  notify: restart graylog
+
+
+
+- name: ReStart graylog.
+  service:
+    name: graylog-server
+    state: restarted
+    enabled: true
+
+
+
+- name: Start graylog.
+  service:
+    name: graylog-server
+    state: started
+    enabled: true
+
+
+
+#- name: Make sure Graylog is running before proceeding.
+#  wait_for:
+#    host: "0.0.0.0"
+#    port: "9000"
+#    delay: 3
+#    timeout: 300
+
+

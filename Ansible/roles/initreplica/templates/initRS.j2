@@ -1,0 +1,8 @@
+rs.initiate( {
+   _id : "{{ replSet }}",
+   members: [
+      { _id: 0, host: "{{hostvars[groups['production'][0]].ansible_host}}:27017" },
+      { _id: 1, host: "{{hostvars[groups['production'][1]].ansible_host}}:27017" },
+      { _id: 2, host: "{{hostvars[groups['production'][2]].ansible_host}}:27017" }
+   ]
+});
